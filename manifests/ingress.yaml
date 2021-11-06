@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: octank
+  namespace: octank
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    external-dns.alpha.kubernetes.io/target: "deadface.org"
+spec:
+  tls:
+  - hosts:
+    - octank.deadface.org
+    secretName: octank
+  rules:
+  - host: octank.deadface.org
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: octank
+            port:
+              number: 80
