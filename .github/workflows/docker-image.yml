@@ -50,3 +50,17 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      - 
+        name: Checkout repo
+        uses: actions/checkout@v2
+      - 
+        name: Update image tag
+        run: sed -i manifests/deployment.yaml -e "s/octank:.*/octank:${{ commit_sha }}/"
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: Ryan Noblett
+          author_email: ryan.noblett@gmail.com
+          message: Deployed tag ${{ commit_sha }}
+          add: metadata/deployment.yaml
