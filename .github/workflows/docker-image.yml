@@ -57,16 +57,16 @@ jobs:
         name: Get Commit SHA
         id: sha
         run: |
-          echo "::set-output name=commit-sha::$(git rev-parse --short "$GITHUB_SHA")\n"
+          run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - 
         name: Update image tag
         run: |
-          sed -i manifests/deployment.yaml -e "s/octank:.*/octank:${{ steps.sha.outputs.commit-id }}/"
+          sed -i manifests/deployment.yaml -e "s/octank:.*/octank:${{ steps.sha.outputs.sha_short }}/"
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v7
         with:
           author_name: Ryan Noblett
           author_email: ryan.noblett@gmail.com
-          message: Deployed tag ${{ steps.sha.outputs.commit-id }}
+          message: Deployed tag ${{ steps.sha.outputs.sha_short }}
           add: metadata/deployment.yaml
