@@ -55,7 +55,6 @@ jobs:
         uses: actions/checkout@v2
       - 
         name: Update image tag
-        needs: steps.meta.outputs
         run: sed -i manifests/deployment.yaml -e "s/octank:.*/octank:${{ steps.meta.outputs.tags.sha }}/"
 
       - name: Commit changes
