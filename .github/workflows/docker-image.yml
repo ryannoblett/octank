@@ -57,7 +57,7 @@ jobs:
         name: Update image tag
         run: |
           cat manifests/deployment.yaml
-          sed -i manifests/deployment.yaml -e "s/octank:.*/octank:${GITHUB_SHA::7}/"
+          sed -i manifests/deployment.yaml -e "s/octank:.*/octank:sha-${GITHUB_SHA::7}/"
           cat manifests/deployment.yaml
 
       - name: Commit changes
@@ -66,4 +66,4 @@ jobs:
           author_name: Ryan Noblett
           author_email: ryan.noblett@gmail.com
           message: Deployed tag
-          add: metadata/deployment.yaml
+          add: ./metadata/deployment.yaml
