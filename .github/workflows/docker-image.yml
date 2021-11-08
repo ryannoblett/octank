@@ -54,19 +54,14 @@ jobs:
         name: Checkout repo
         uses: actions/checkout@v2
       - 
-        name: Get Commit SHA
-        id: sha
-        run: |
-          run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-      - 
         name: Update image tag
         run: |
-          sed -i manifests/deployment.yaml -e "s/octank:.*/octank:${{ steps.sha.outputs.sha_short }}/"
+          sed -i manifests/deployment.yaml -e "s/octank:.*/octank:${GITHUB_SHA::7}/"
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v7
         with:
           author_name: Ryan Noblett
           author_email: ryan.noblett@gmail.com
-          message: Deployed tag ${{ steps.sha.outputs.sha_short }}
+          message: Deployed tag
           add: metadata/deployment.yaml
