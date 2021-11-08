@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: octank
-        image: registry.gitlab.com/deadface_org/octank:sha-f546be1
+        image: ghcr.io/ryannoblett/octank:sha-d605f5a
         ports:
         - containerPort: 80
         resources:
