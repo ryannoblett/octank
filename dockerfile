@@ -1,3 +1,3 @@
-FROM nginx:alpine
-USER nginx
+nginxinc/nginx-unprivileged:mainline-alpine
+
 CMD ["nginx", "-g", "daemon off;"]
