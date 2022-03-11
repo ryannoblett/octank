@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: octank
-        image: ghcr.io/ryannoblett/octank:sha-c4676e3
+        image: ghcr.io/ryannoblett/octank:sha-b3ba3ad
         ports:
         - containerPort: 80
         resources:
